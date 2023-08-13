@@ -8,32 +8,32 @@ export default function Friends({ friends }) {
                 <small>(According to me)</small>
             </p>
             <ul>
-                {friends.map((friend) => (
-                    <li>
-                        <h2>{friend.firstName} {friend.lastName}</h2>
-                        <h3>{friend.location}</h3>
-                        <p>{friend.job}</p>
-                    </li>
-                ))}
+              {friends.map((friend) => (
+                <li>
+                  <h2>{friend.firstName} {friend.lastName}</h2>
+                  <h3>{friend.location}</h3>
+                  <p>{friend.job}</p>
+                </li>
+              ))}
             </ul>
         </div>
     );
 }
 
 export async function getServerSideProps() {
-    try {
-        const client = await clientPromise;
-        const db = client.db("relay");
+  try {
+    const client = await clientPromise;
+    const db = client.db("relay");
 
-        const friends = await db
-            .collection("friends")
-            .find({})
-            .toArray();
+    const friends = await db
+      .collection("friends")
+      .find({})
+      .toArray();
 
-        return {
-            props: { friends: JSON.parse(JSON.stringify(friends)) },
-        };
-    } catch (e) {
-        console.error(e);
-    }
+    return {
+      props: { friends: JSON.parse(JSON.stringify(friends)) },
+    };
+  } catch (e) {
+    console.error(e);
+  }
 }
