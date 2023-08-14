@@ -1,3 +1,5 @@
+import Interests from '../enums.js';
+
 export default function Form() {
   return (
     <div >
@@ -23,6 +25,16 @@ export default function Form() {
 
         <label htmlFor="birthday">Birthday</label>
         <input type="date" id="birthday" name="birthday" required />
+
+        <label htmlFor="interests">Interests</label>
+        <select select="date" id="interests" name="interests" multiple required>
+
+        {Object.values(Interests).map((interest) => {
+          return (
+            <option value={interest}>{interest}</option>
+          )
+        })}
+        </select>
 
         <button type="submit">Submit</button>
       </form>

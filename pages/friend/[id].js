@@ -9,6 +9,7 @@ export default function Friend({ friend }) {
           <h2>{friend.firstName} {friend.lastName}</h2>
           <h3>{friend.location}</h3>
           <p>{friend.job}</p>
+          <p>{friend.interests.join(', ')}</p>
         </div>
        ): 
        (<div></div>)}
@@ -16,24 +17,6 @@ export default function Friend({ friend }) {
     </div>
   )
 }
-/*
-export async function getServerSideProps() {
-  try {
-      const client = await clientPromise;
-      const db = client.db("relay");
-
-      const friend = await db
-          .collection("friends")
-          .findById("64b494b6e4aa77fae1e67161")
-
-      return {
-          props: { friend: JSON.parse(JSON.stringify(friend)) },
-      };
-  } catch (e) {
-      console.error(e);
-  }
-}
-*/
 
 export async function getStaticProps(context) {
   const params = context.params;
@@ -48,7 +31,6 @@ export async function getStaticProps(context) {
       console.error(e);
   }
 }
-
 
 export const getStaticPaths = async () => {
   return {
