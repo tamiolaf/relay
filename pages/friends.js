@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import clientPromise from "../lib/mongodb";
 
 export default function Friends({ friends }) {
@@ -9,8 +10,12 @@ export default function Friends({ friends }) {
             </p>
             <ul>
               {friends.map((friend) => (
-                <li>
-                  <h2>{friend.firstName} {friend.lastName}</h2>
+                <li key={friend._id}>
+                  <h2>
+                    <Link href={"/friend/" + friend._id}>
+                      {friend.firstName} {friend.lastName}
+                    </Link>
+                  </h2>
                   <h3>{friend.location}</h3>
                   <p>{friend.job}</p>
                 </li>
