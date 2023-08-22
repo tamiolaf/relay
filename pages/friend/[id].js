@@ -9,7 +9,7 @@ export default function Friend({ friend }) {
           <h2>{friend.firstName} {friend.lastName}</h2>
           <h3>{friend.location}</h3>
           <p>{friend.job}</p>
-          <p>{friend.interests.join(', ')}</p>
+          <p>{friend.interests ? friend.interests.join(',') : "no interests listed"}</p>
         </div>
        ): 
        (<div></div>)}
