@@ -29,6 +29,7 @@ export async function getStaticProps(context) {
       };
   } catch (e) {
       console.error(e);
+      return {props: {friend: {}}}
   }
 }
 

@@ -13,8 +13,6 @@ export default function Friends({ friends }) {
       if (friends) {
         setFilteredFriends(friends.filter((friend) => {
           if(friend.interests) {
-            console.log(friend.interests)
-            console.log(friend.interests.includes(selectedInterest));
             return friend.interests.includes(selectedInterest);
           }
             
