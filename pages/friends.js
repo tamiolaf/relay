@@ -4,16 +4,16 @@ import Interests from '../enums.js';
 import { useEffect, useState } from "react";
 
 export default function Friends({ friends }) {
-    const [selectedInterest, setSelectedInterest] = useState("");
+    const [selectedInterest, setSelectedInterest] = useState("all");
     const [filteredFriends, setFilteredFriends] = useState(friends);
 
     useEffect(() => {
-      console.log(selectedInterest)
-      
       if (friends) {
         setFilteredFriends(friends.filter((friend) => {
-          if(friend.interests) {
-            return friend.interests.includes(selectedInterest);
+          if (selectedInterest == "all") {
+            return true;
+          } else if(friend.interests) {
+            return friend.interests.includes(selectedInterest); 
           }
             
           }, () => console.log(filteredFriends))
@@ -28,6 +28,11 @@ export default function Friends({ friends }) {
                 <small>(According to me)</small>
             </p>
             <select select="date" id="interests" name="interests" onChange={e => setSelectedInterest(e.target.value)} >
+              <option
+                      key={"all"}
+                      value={"all"}>
+                        All
+              </option>
               {Object.values(Interests).map((interest) => {
                 return (
                   <option

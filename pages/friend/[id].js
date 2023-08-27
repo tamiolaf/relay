@@ -1,4 +1,5 @@
 import { getFriend } from "../api/friend/[id]";
+import Link from "next/link";
 
 export default function Friend({ friend }) {
   return (
@@ -6,14 +7,19 @@ export default function Friend({ friend }) {
        <h1>Single Item (friend) Page</h1>
        {friend ? (
         <div>
-          <h2>{friend.firstName} {friend.lastName}</h2>
-          <h3>{friend.location}</h3>
-          <p>{friend.job}</p>
-          <p>{friend.interests ? friend.interests.join(',') : "no interests listed"}</p>
+          <div>
+            <h2>{friend.firstName} {friend.lastName}</h2>
+            <h3>{friend.location}</h3>
+            <p>{friend.job}</p>
+            <p>{friend.interests ? friend.interests.join(',') : "no interests listed"}</p>
+          </div>
+
+          <Link href={"/edit/" + friend._id}>
+            Edit
+          </Link>
         </div>
        ): 
        (<div></div>)}
-
     </div>
   )
 }
