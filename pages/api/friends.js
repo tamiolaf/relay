@@ -13,7 +13,6 @@ export default async (req, res) => {
 
     res.json(friends);
   } else if (req.method === "POST") {
-    console.log(req.body)
     const insertedId = await addFriend(req.body)
     res.status(200).json(insertedId)
   }

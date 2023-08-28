@@ -11,7 +11,7 @@ export default function Form() {
         }}
         action="/api/friends"
         method="post">
-        <label htmlFor="roll">First Name</label>
+        <label htmlFor="firstName">First Name</label>
         <input type="text" id="firstName" name="firstName" required/>
 
         <label htmlFor="lastName">Last Name</label>
