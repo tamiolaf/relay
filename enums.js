@@ -28,6 +28,8 @@ export const COMEDY = "comedy";
 
 export const GYM_STUFF = "gym_stuff";
 
+export const DANCING = "dancing";
+
 const Interests = {
   GAY_SHIT,
   PHOTOGRAPHY,
@@ -44,6 +46,7 @@ const Interests = {
   CONCERTS,
   COMEDY,
   GYM_STUFF,
+  DANCING
 };
 
 export default Interests;

@@ -78,7 +78,7 @@ export default function Friend({ friend }) {
             </select>
 
             <label htmlFor="id">Id</label>
-            <input id="id" value={friend._id} name="_id" disabled/>
+            <input id="id" value={friend._id} name="_id" />
 
             <button type="submit">Save</button>
           </form>
@@ -100,7 +100,7 @@ export default function Friend({ friend }) {
               <h2>{friend.firstName} {friend.lastName}</h2>
               <h3>{friend.location}</h3>
               <p>{friend.job}</p>
-              <p>{friend.interests ? friend.interests.join(', ') : "no interests listed"}</p>
+              <p>{friend.interests ? (typeof(friend.interests) == 'object' ? friend.interests.join(', ') : friend.interests) : "no interests listed"}</p>
             </div>
 
             <button onClick={e => setIsEditMode(true)}> {/*href={"/edit/" + friend._id}>*/}
