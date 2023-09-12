@@ -83,7 +83,7 @@ export default function Friend({ friend, entries }) {
             </select>
 
             <label htmlFor="id">Id</label>
-            <input id="id" value={friend._id} name="_id" readOnly/>
+            <input id="id" value={friend._id} name="_id" />
 
             <button type="submit">Save</button>
           </form>
@@ -139,7 +139,7 @@ export default function Friend({ friend, entries }) {
                 )
               })}
             </select>
-            <input id="friendId" value={friend._id} name="friendId" readOnly hidden/>
+            <input id="friendId" value={friend._id} name="friendId"/>
 
             <button type="submit">Add Entry</button>
           </form>
