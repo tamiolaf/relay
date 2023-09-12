@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import clientPromise from "../lib/mongodb";
-import Interests from '../enums.js';
+import { Interests } from '../enums.js';
 import { useEffect, useState } from "react";
 
 export default function Friends({ friends }) {

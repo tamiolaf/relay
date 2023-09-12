@@ -1,9 +1,10 @@
 import { getFriend } from "../api/friend/[id]";
 import Link from "next/link";
 import { useState, useEffect } from 'react';
-import Interests from '../../enums.js';
+import { Interests, ModesOfContact } from '../../enums.js';
+import { getFriendEntries } from "../api/entries/[id]";
 
-export default function Friend({ friend }) {
+export default function Friend({ friend, entries }) {
   useEffect(() => {
     if (friend) {
       setFirstName(friend.firstName)
@@ -64,7 +65,6 @@ export default function Friend({ friend }) {
               if (tempInterests.includes(interest)) {
                 const interestIndex = interests.indexOf(interest) //remove it
               
-                console.log(tempInterests.splice(interestIndex, 1));
                 setInterests(tempInterests);
               } else {
                 interests ? setInterests([...interests, interest]) : setInterests([interest]);
@@ -93,12 +93,11 @@ export default function Friend({ friend }) {
   const displayFriendView = (friend) => {
     return (
       <div>
-        <h1>Single Item (friend) Page</h1>
         {friend ? (
           <div>
             <div>
-              <h2>{friend.firstName} {friend.lastName}</h2>
-              <h3>{friend.location}</h3>
+              <h1>{friend.firstName} {friend.lastName}</h1>
+              <p>{friend.location}</p>
               <p>{friend.job}</p>
               <p>{friend.interests ? (typeof(friend.interests) == 'object' ? friend.interests.join(', ') : friend.interests) : "no interests listed"}</p>
             </div>
@@ -112,9 +111,57 @@ export default function Friend({ friend }) {
       </div>
     )
   }
+
+  const addEntryForm = (friend) => {
+    return (
+      <div>
+         <form 
+            style={{
+              display:"flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+            }}
+            action="/api/entries"
+            method="post">
+            <label htmlFor="text" >Text</label>
+            <textarea type="text" id="text" name="text" required/>
+            <br/>
+            <label htmlFor="modeOfContact">Mode of Contact</label>
+            <select select="date" id="modeOfContact" name="modeOfContact" required>
+              {Object.values(ModesOfContact).map((modeOfContact) => {
+                return (
+                  <option key={modeOfContact} value={modeOfContact}>{modeOfContact}</option>
+                )
+              })}
+            </select>
+            <input id="friendId" value={friend._id} name="friendId" hidden/>
+
+            <button type="submit">Add Entry</button>
+          </form>
+      </div>
+    )
+  }
+
   return (
     <div>
        {isEditMode ? editFriendView(friend) : displayFriendView(friend)}
+       <div>
+         <h2>Entries</h2>
+        {friend ? addEntryForm(friend) : ""}
+        {entries ?
+          entries.map(entry => {
+            return (
+              <div>
+                <hr/>
+                <p>{entry.text}</p>
+                <p><strong>{entry.modeOfContact}</strong>: {new Date(entry.createdAt).toLocaleDateString()} {new Date(entry.createdAt).toLocaleTimeString()}</p>
+                <p></p>
+              </div>
+            )
+          })
+        : "No entries yet"
+        }
+       </div>
     </div>
   )
 }
@@ -124,13 +171,22 @@ export async function getStaticProps(context) {
 
   try {
       const friend = await getFriend(params.id)
-      console.log(friend)
+      const entries = await getFriendEntries(params.id)
+
       return {
-          props: { friend: JSON.parse(JSON.stringify(friend)) },
+          props: {
+            friend: JSON.parse(JSON.stringify(friend)),
+            entries: JSON.parse(JSON.stringify(entries))
+           },
       };
   } catch (e) {
       console.error(e);
-      return {props: {friend: {}}}
+      return {
+        props: {
+          friend: {},
+          entries: []
+        }
+      }
   }
 }
 

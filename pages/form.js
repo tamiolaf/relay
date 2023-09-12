@@ -1,4 +1,4 @@
-import Interests from '../enums.js';
+import { Interests } from '../enums.js';
 
 export default function Form() {
   return (

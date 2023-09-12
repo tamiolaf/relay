@@ -1,4 +1,5 @@
-import Interests from '../../enums.js';
+import { Interests } from '../../enums.js';
+import { getFriend } from "../api/friend/[id]";
 
 export default function EditFriend() {
   return (
@@ -47,7 +48,6 @@ export async function getStaticProps(context) {
 
   try {
       const friend = await getFriend(params.id)
-      console.log(friend)
       return {
           props: { friend: JSON.parse(JSON.stringify(friend)) },
       };

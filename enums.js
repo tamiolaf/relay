@@ -30,7 +30,8 @@ export const GYM_STUFF = "gym_stuff";
 
 export const DANCING = "dancing";
 
-const Interests = {
+
+export const Interests = {
   GAY_SHIT,
   PHOTOGRAPHY,
   MUSIC,
@@ -49,4 +50,20 @@ const Interests = {
   DANCING
 };
 
-export default Interests;
+export const PHONE_CALL = "phone_call";
+
+export const TEXT = "text";
+
+export const FACETIME = "facetime";
+
+export const IRL = "irl";
+
+export const SOCIAL_MEDIA = "social_media";
+
+export const ModesOfContact = {
+  PHONE_CALL,
+  TEXT,
+  FACETIME,
+  IRL,
+  SOCIAL_MEDIA,
+}

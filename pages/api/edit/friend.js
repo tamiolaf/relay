@@ -8,8 +8,6 @@ export default async (req, res) => {
     const client = await clientPromise;
     const db = client.db("relay");
 
-    console.log(typeof(updatedFriend._id))
-
     const filter = { _id: new ObjectId(updatedFriend._id) }//{_id: new ObjectId(updatedFriend._id)}
 
     const options = { upsert: true }
