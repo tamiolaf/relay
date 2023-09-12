@@ -64,7 +64,7 @@ export default function Friend({ friend }) {
               if (tempInterests.includes(interest)) {
                 const interestIndex = interests.indexOf(interest) //remove it
               
-                console.log(tempInterests.splice(interestIndex, 1));
+                tempInterests.splice(interestIndex, 1)
                 setInterests(tempInterests);
               } else {
                 interests ? setInterests([...interests, interest]) : setInterests([interest]);
@@ -78,7 +78,7 @@ export default function Friend({ friend }) {
             </select>
 
             <label htmlFor="id">Id</label>
-            <input id="id" value={friend._id} name="_id" />
+            <input id="id" value={friend._id} name="_id" readOnly/>
 
             <button type="submit">Save</button>
           </form>
