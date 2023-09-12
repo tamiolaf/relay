@@ -62,14 +62,18 @@ export default function Friend({ friend, entries }) {
               const interest = e.target.value;
               const tempInterests = interests ? [...interests] : [];
 
+              console.log(tempInterests)
+
               if (tempInterests.includes(interest)) {
                 const interestIndex = interests.indexOf(interest) //remove it
               
                 tempInterests.splice(interestIndex, 1)
                 setInterests(tempInterests);
               } else {
-                interests ? setInterests([...interests, interest]) : setInterests([interest]);
+                tempInterests.push(interest)
+                interests ? setInterests(tempInterests) : setInterests(tempInterests);
               }
+              console.log(tempInterests)
             }} select="date" id="interests" name="interests" multiple required>
               {Object.values(Interests).map((interest) => {
                 return (
@@ -135,7 +139,7 @@ export default function Friend({ friend, entries }) {
                 )
               })}
             </select>
-            <input id="friendId" value={friend._id} name="friendId" hidden/>
+            <input id="friendId" value={friend._id} name="friendId" readOnly hidden/>
 
             <button type="submit">Add Entry</button>
           </form>
