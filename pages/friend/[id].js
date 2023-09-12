@@ -139,7 +139,7 @@ export default function Friend({ friend, entries }) {
                 )
               })}
             </select>
-            <input id="friendId" value={friend._id} name="friendId"/>
+            <input id="friendId" value={friend._id} name="friendId" hidden/>
 
             <button type="submit">Add Entry</button>
           </form>
