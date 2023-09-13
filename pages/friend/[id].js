@@ -83,7 +83,7 @@ export default function Friend({ friend, entries }) {
             </select>
 
             <label htmlFor="id">Id</label>
-            <input id="id" value={friend._id} name="_id" />
+            <input id="id" defaultValue={friend._id} name="_id" />
 
             <button type="submit">Save</button>
           </form>
@@ -139,7 +139,7 @@ export default function Friend({ friend, entries }) {
                 )
               })}
             </select>
-            <input id="friendId" value={friend._id} name="friendId" hidden/>
+            <input id="friendId" defaultValue={friend._id} name="friendId" hidden/>
 
             <button type="submit">Add Entry</button>
           </form>
@@ -156,7 +156,7 @@ export default function Friend({ friend, entries }) {
         {entries ?
           entries.map(entry => {
             return (
-              <div>
+              <div key={entry._id}>
                 <hr/>
                 <p>{entry.text}</p>
                 <p><strong>{entry.modeOfContact}</strong>: {new Date(entry.createdAt).toLocaleDateString()} {new Date(entry.createdAt).toLocaleTimeString()}</p>
@@ -171,7 +171,7 @@ export default function Friend({ friend, entries }) {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const params = context.params;
 
   try {
@@ -192,18 +192,5 @@ export async function getStaticProps(context) {
           entries: []
         }
       }
-  }
-}
-
-export const getStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: {
-          id: 'next',
-        },
-      }, // See the "paths" section below
-    ],
-    fallback: true, // false or "blocking"
   }
 }
